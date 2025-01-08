@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extracted Texts</title>
+</head>
+<body>
+    <h2>Extracted Texts from Uploaded PDFs</h2>
+    {% for file in extracted_texts %}
+        <h3>{{ file.filename }}</h3>
+        <pre>{{ file.text }}</pre>
+        <hr>
+    {% endfor %}
+    <a href="{{ url_for('upload_form') }}">Upload more files</a>
+</body>
+</html>

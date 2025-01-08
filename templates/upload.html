@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload PDFs</title>
+</head>
+<body>
+    <h2>Upload PDF files</h2>
+    <form action="{{ url_for('upload_files') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" multiple accept=".pdf" required>
+        <br><br>
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
