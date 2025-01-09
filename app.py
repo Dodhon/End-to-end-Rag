@@ -16,6 +16,20 @@ if not os.path.exists(UPLOAD_FOLDER):
 def upload_form():
     return render_template('upload.html')
 
+@app.route('/conversation')
+def conversation():
+    # TODO
+    # add actual conversation
+    return render_template('conversation.html')
+    
+
+@app.route('/all_files')
+def all_files():
+    files = list()
+    for file in os.listdir(UPLOAD_FOLDER):
+        files.append(file)
+    return render_template('all_files.html', files=files)
+
 @app.route('/upload', methods=['POST'])
 def upload_files():
     if 'files' not in request.files:

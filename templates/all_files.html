@@ -5,13 +5,13 @@
     <title>Extracted Texts</title>
 </head>
 <body>
-    <h2>Extracted Texts from Uploaded PDFs</h2>
-    {% for file in extracted_texts %}
-        <h3>{{ file.filename }}</h3>
-        <pre>{{ file.text }}</pre>
+    <h2>All Names of Uploaded PDFs</h2>
+    {% for file in files %}
+        <h3>{{ file }}</h3>
         <hr>
     {% endfor %}
     <a href="{{ url_for('upload_form') }}">Upload more files</a>
+    <br><br>
     <a href="{{ url_for('conversation') }}">Have a conversation with all uploaded files</a>
 </body>
 </html>
