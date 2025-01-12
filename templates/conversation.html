@@ -3,11 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat with Uploaded Documents</title>
+    <style>
+        .source-info {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            margin-top: 4px;
+        }
+        .chat-message {
+            margin-bottom: 16px;
+        }
+    </style>
 </head>
 <body>
-
-</body>
-<body>
+    <h2>Chat with Your Documents</h2>
+    <div id="chat-container">
+        <div id="chat-history"></div>
+        <form id="question-form">
+            <input type="text" id="question" name="question" placeholder="Ask a question..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
     <a href="{{ url_for('upload_form') }}">Upload more files</a>
+    
+    <script>
+        document.getElementById('question-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const question = document.getElementById('question').value;
+            
+            // Add question to chat
+            const chatHistory = document.getElementById('chat-history');
+            chatHistory.innerHTML += `
+                <div class="chat-message">
+                    <p><strong>Q:</strong> ${question}</p>
+                </div>
+            `;
+            
+            // Clear input
+            document.getElementById('question').value = '';
+            
+            try {
+                const response = await fetch('/conversation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `question=${encodeURIComponent(question)}`
+                });
+                
+                const data = await response.json();
+                
+                // Add answer with source info
+                const sourceText = data.isWebSearch 
+                    ? "Source: Web Search Results" 
+                    : "Source: Uploaded Documents";
+                
+                chatHistory.innerHTML += `
+                    <div class="chat-message">
+                        <p><strong>A:</strong> ${data.answer}</p>
+                        <p class="source-info">${sourceText}</p>
+                    </div>
+                `;
+            } catch (error) {
+                chatHistory.innerHTML += `
+                    <div class="chat-message">
+                        <p><strong>Error:</strong> Failed to get response. Please try again.</p>
+                    </div>
+                `;
+            }
+        };
+    </script>
 </body>
 </html>

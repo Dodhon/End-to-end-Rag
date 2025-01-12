@@ -1,6 +1,7 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, jsonify
 import fitz  # PyMuPDF
 import os
+from rag import init_llm, process_pdfs, get_answer
 
 app = Flask(__name__)
 
@@ -12,15 +13,37 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
     
+# Add these as global variables after app initialization
+llm = init_llm()
+retriever = None
+
 @app.route('/')
 def upload_form():
     return render_template('upload.html')
 
-@app.route('/conversation')
+@app.route('/conversation', methods=['GET', 'POST'])
 def conversation():
-    # TODO
-    # add actual conversation
-    return render_template('conversation.html')
+    global retriever
+    
+    if request.method == 'GET':
+        return render_template('conversation.html')
+    
+    if request.method == 'POST':
+        question = request.form.get('question')
+        
+        # Initialize retriever if not already done
+        if retriever is None:
+            file_paths = [os.path.join(app.config['UPLOAD_FOLDER'], f) 
+                         for f in os.listdir(app.config['UPLOAD_FOLDER'])]
+            retriever = process_pdfs(file_paths)
+        
+        # Get answer and source
+        answer, is_web_search = get_answer(question, retriever, llm)
+        
+        return jsonify({
+            'answer': answer,
+            'isWebSearch': is_web_search
+        })
     
 
 @app.route('/all_files')
