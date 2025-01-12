@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Extracted Texts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h2>Extracted Texts from Uploaded PDFs</h2>
-    {% for file in extracted_texts %}
-        <h3>{{ file.filename }}</h3>
-        <pre>{{ file.text }}</pre>
-        <hr>
-    {% endfor %}
-    <a href="{{ url_for('upload_form') }}">Upload more files</a>
-    <a href="{{ url_for('conversation') }}">Have a conversation with all uploaded files</a>
+    <div class="container">
+        <h2>Extracted Texts from Uploaded PDFs</h2>
+        {% for file in extracted_texts %}
+            <h3>{{ file.filename }}</h3>
+            <pre>{{ file.text }}</pre>
+            <hr>
+        {% endfor %}
+        <div>
+            <a href="{{ url_for('upload_form') }}">Upload more files</a>
+            <a href="{{ url_for('conversation') }}">Have a conversation with all uploaded files</a>
+        </div>
+    </div>
 </body>
 </html>

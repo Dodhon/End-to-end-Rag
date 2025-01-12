@@ -3,29 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat with Uploaded Documents</title>
-    <style>
-        .source-info {
-            font-size: 0.8em;
-            color: #666;
-            font-style: italic;
-            margin-top: 4px;
-        }
-        .chat-message {
-            margin-bottom: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h2>Chat with Your Documents</h2>
-    <div id="chat-container">
-        <div id="chat-history"></div>
-        <form id="question-form">
-            <input type="text" id="question" name="question" placeholder="Ask a question..." required>
-            <button type="submit">Send</button>
-        </form>
+    <div class="container">
+        <h2>Chat with Your Documents</h2>
+        <div id="chat-container">
+            <div id="chat-history"></div>
+            <form id="question-form">
+                <input type="text" id="question" name="question" placeholder="Ask a question..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <a href="{{ url_for('upload_form') }}">Upload more files</a>
     </div>
-    <a href="{{ url_for('upload_form') }}">Upload more files</a>
-    
     <script>
         document.getElementById('question-form').onsubmit = async (e) => {
             e.preventDefault();

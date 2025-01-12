@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, jsonify
+from flask import Flask, request, render_template, redirect, url_for, jsonify, send_from_directory
 import fitz  # PyMuPDF
 import os
 from rag import init_llm, process_pdfs, get_answer
@@ -86,6 +86,9 @@ def extract_text_from_pdf(pdf_path):
         text = f"An error occurred while processing {pdf_path}: {str(e)}"
     return text
 
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
 if __name__ == "__main__":
     app.run(debug=True)

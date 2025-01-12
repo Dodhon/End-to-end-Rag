@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload PDFs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h2>Upload PDF files</h2>
-    <form action="{{ url_for('upload_files') }}" method="post" enctype="multipart/form-data">
-        <input type="file" name="files" multiple accept=".pdf" required>
-        <br><br>
-        <input type="submit" value="Upload">
-    </form>
-    <br><br>
-    <a href="{{ url_for('conversation') }}">Have a conversation with all uploaded files</a>
-    <br><br>
-    <a href="{{ url_for('all_files') }}">View all files that have been submitted</a>
+    <div class="container">
+        <h2>Upload PDF files</h2>
+        <form action="{{ url_for('upload_files') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="files" multiple accept=".pdf" required>
+            <input type="submit" value="Upload">
+        </form>
+        <div>
+            <a href="{{ url_for('conversation') }}">Have a conversation with all uploaded files</a>
+            <a href="{{ url_for('all_files') }}">View all files that have been submitted</a>
+        </div>
+    </div>
 </body>
 </html>

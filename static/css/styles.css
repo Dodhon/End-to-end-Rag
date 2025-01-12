@@ -1,0 +1,118 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles */
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"], 
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button, 
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover, 
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Chat styles */
+#chat-container {
+    margin-bottom: 20px;
+}
+
+#chat-history {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.chat-message {
+    margin-bottom: 16px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.chat-message:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.source-info {
+    font-size: 0.8em;
+    color: #666;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+/* Link styles */
+a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* File list styles */
+.file-list {
+    list-style: none;
+    padding: 0;
+}
+
+.file-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* PDF text display */
+pre {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+} 
